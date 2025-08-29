@@ -1,0 +1,69 @@
+1,项目结构
+goods/
+├── app.py  # 入口
+├── common/
+│   ├── utils.py
+├── config/
+│   ├── config.py
+├── db/
+│   ├── 初始化.sql  # MySQL建库建表
+├── entity/
+│   ├── cartItem.py
+│   ├── product.py
+│   ├── user.py
+├── libs/
+│   ├── application.py
+│   ├── database.py
+│   ├── html.py
+├── modules/
+│   ├── content/
+│   │   ├── controller/
+│   │   │   ├── login.py
+│   │   │   ├── products.py
+│   │   │   ├── register.py
+│   ├── system/
+│   │   ├── controller/
+│   │   │   ├── cart.py
+├── resources/
+│   ├── application-dev.yml
+│   ├── application-pro.yml
+│   ├── application.yml
+│   ├── templates/
+│   │   ├── 404.html
+│   │   ├── 500.html
+│   │   ├── base.html
+│   │   ├── cart.html
+│   │   ├── checkout.html
+│   │   ├── checkout_cart.html
+│   │   ├── login.html
+│   │   ├── order_confirmation.html
+│   │   ├── products.html
+│   │   ├── register.html
+├── static/
+│   ├── css/
+│   │   ├── auth.css
+│   │   ├── base.css
+│   │   ├── cart.css
+│   │   ├── checkout.css
+│   │   ├── confirmation.css
+│   │   ├── products.css
+│   ├── js/
+│   │   ├── register.js
+│   │   ├── base.js
+│   │   ├── cart.js
+│   │   ├── checkout.js
+
+
+2,执行命令
+pyinstaller --name=pythonmvc --onedir --add-data "mvc/resources/*.yml:resources" --add-data "mvc/resources/templates/*:resources/templates"  --add-data "mvc/static/css*:static/css" --add-data "mvc/static/js/*:static/js"  mvc/app.py
+
+3,命令说明
+--name=pythonmvc：指定生成的可执行文件名称。
+--onefile：将所有文件打包成一个可执行文件。
+--add-data "mvc/templates/*:templates"：将模板文件夹包含在打包文件中。
+--add-data "mvc/static/*:static"：将静态文件夹包含在打包文件中。
+
+4,打包完成后，生成的文件位于 dist/ 目录：
+dist/
+└── pythonmvc.exe  # Windows
+└── pythonmvc      # Linux/macOS

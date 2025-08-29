@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}订单结算{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/checkout.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="checkout-container">
+    <h2 class="checkout-title">订单结算</h2>
+
+    <div class="checkout-grid">
+        <!-- 商品列表 -->
+        <div class="cart-items">
+            <h3>购物车商品</h3>
+            {% include 'checkout_cart.html' %}
+        </div>
+
+        <!-- 订单摘要 -->
+        <div class="order-summary">
+            <h3>订单摘要</h3>
+            <div class="summary-row">
+                <span>商品总计：</span>
+                <span>¥{{ "%.2f"|format(total) }}</span>
+            </div>
+            <div class="summary-row">
+                <span>运费：</span>
+                <span>¥0.00</span>
+            </div>
+            <div class="summary-row total-row">
+                <span>应付总额：</span>
+                <span>¥{{ "%.2f"|format(total) }}</span>
+            </div>
+            <button class="checkout-btn">确认支付</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/checkout.js') }}"></script>
+{% endblock %}

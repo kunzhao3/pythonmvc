@@ -1,0 +1,34 @@
+<table class="cart-table">
+    <thead>
+    <tr>
+        <th>商品</th>
+        <th class="text-end">单价</th>
+        <th>数量</th>
+        <th class="text-end">小计</th>
+        {% if show_actions %}
+        <th>操作</th>
+        {% endif %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in cart_items %}
+    <tr>
+        <!-- 商品信息 -->
+        <td>
+            <div class="product-info">
+                <h4 class="product-name">{{ item.name }}</h4>
+                <small class="product-id">商品编号: {{ item.id }}</small>
+            </div>
+        </td>
+        <!-- 单价 -->
+        <td class="text-end">¥{{ "%.2f"|format(item.price) }}</td>
+        <!-- 数量 -->
+        <td>
+            <span class="quantity-display">{{ item.quantity }}</span>
+        </td>
+        <!-- 小计 -->
+        <td class="text-end">¥{{ "%.2f"|format(item.price * item.quantity) }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>

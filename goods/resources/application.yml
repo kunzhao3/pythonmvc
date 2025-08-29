@@ -1,0 +1,28 @@
+# 选择环境
+profiles:
+  active: dev
+
+# 开发环境配置
+server:
+  host: 0.0.0.0
+  # 服务器的HTTP端口，默认为5000
+  port: 8081
+  debug: True
+
+# token配置
+token:
+    # 令牌密钥
+    secret: abcdefghijklmnopqrstuvwxyz
+
+log:
+  #是否开启登录日志
+  loginEnabled: True
+  #是否开启操作日志
+  operationEnabled: True
+
+# 需要登录的才能访问的路径
+check_login_urls:
+  # /system为开头的路径
+  - "^/system"
+
+

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}购物车{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="cart-container">
+    {% if cart_items %}
+    <table class="cart-table">
+        <thead>
+        <tr>
+            <th>商品</th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>小计</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in cart_items %}
+        <tr>
+            <td>
+                <div class="product-info">
+                    <div>
+                        <div class="product-name">{{ item.name }}</div>
+                        <div class="product-id">商品编号: {{ item.pid }}</div>
+                    </div>
+                </div>
+            </td>
+            <td>¥{{ "%.2f"|format(item.price) }}</td>
+            <td>
+                <form class="quantity-control"
+                      method="POST"
+                      action="/system/cart/update_cart?item_id={{ item.cid }}">
+                    <label>
+                        <input type="number"
+                               class="quantity-input"
+                               name="quantity"
+                               value="{{ item.quantity }}"
+                               min="1">
+                    </label>
+                </form>
+            </td>
+            <td>¥{{ "%.2f"|format(item.price * item.quantity) }}</td>
+            <td>
+                <a href="/system/cart/remove_from_cart?item_id={{ item.cid }}"
+                   class="delete-btn"
+                   onclick="return confirmDelete()">删除</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="order-summary">
+        <div class="summary-row">
+            <span>商品总计：</span>
+            <span>¥{{ "%.2f"|format(total) }}</span>
+        </div>
+        <div class="summary-row">
+            <span>运费：</span>
+            <span>¥0.00</span>
+        </div>
+        <div class="summary-row total-row">
+            <span>应付总额：</span>
+            <span>¥{{ "%.2f"|format(total) }}</span>
+        </div>
+        <a href="/system/cart/checkout" class="continue-shopping">去结算</a>
+    </div>
+    {% else %}
+    <div class="empty-cart">
+        <div class="empty-icon">🛒</div>
+        <h2>您的购物车是空的</h2>
+        <p>快去挑选心仪的商品吧！</p>
+        <br/>
+        <a href="/content/products/init" class="continue-shopping">立即购物</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+{% endblock %}

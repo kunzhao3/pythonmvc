@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}商品列表{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/products.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="products-container">
+  <h2 class="products-title">商品列表</h2>
+
+  <div class="product-grid">
+    {% for product in products %}
+    <div class="product-card">
+      <div class="product-info">
+        <h3 class="product-name">{{ product.name }}</h3>
+        <p class="product-price">¥{{ "%.2f"|format(product.price) }}</p>
+      </div>
+      <a href="/system/cart/add_to_cart?product_id={{product.id}}" class="add-to-cart-btn">加入购物车</a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

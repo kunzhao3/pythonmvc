@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}用户登录{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
+{% block content %}
+<div id="myModal"></div>
+<div class="auth-container">
+    <h2 class="auth-title">用户登录</h2>
+
+        <div class="form-group">
+            <label for="username">用户名</label>
+            <input type="text" id="username" name="username" placeholder="请输入账号">
+        </div>
+
+        <div class="form-group">
+            <label for="password">密码</label>
+            <input type="password" id="password" name="password"  placeholder="请输入密码">
+        </div>
+
+        <button class="auth-btn" id="submit">登录</button>
+
+        <div class="auth-footer">
+            <span>还没有账号？</span>
+            <a href="/content/register/register">立即注册</a>
+        </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% endblock %}
